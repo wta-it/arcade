@@ -1,0 +1,546 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WTA Student Arcade</title>
+<meta name="description" content="Games made by IT exploratory students at Westfield Technical Academy.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600;700&family=Inter:wght@400;500;600&display=swap">
+<style>
+  :root {
+    --background: #0D0912;
+    --card: #19121F;
+    --card-border: #34244A;
+    --text: #F2EDE3;
+    --text-dim: #A497B5;
+    --purple: #5B2C8F;
+    --purple-light: #7A4BB3;
+    --gold: #D9A928;
+    --gold-hover: #E8BE4A;
+    --heading-font: "Chakra Petch", "Segoe UI", sans-serif;
+    --body-font: "Inter", "Segoe UI", sans-serif;
+    color-scheme: dark;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    font-family: var(--body-font);
+    line-height: 1.5;
+    color: var(--text);
+    background-color: var(--background);
+    background-image:
+      radial-gradient(ellipse at top, rgba(91, 44, 143, 0.35), transparent 60%),
+      radial-gradient(1px 1px at 12% 18%, #FFFFFF 50%, transparent 51%),
+      radial-gradient(1px 1px at 68% 8%, #E3D3F5 50%, transparent 51%),
+      radial-gradient(1.5px 1.5px at 85% 42%, #FFFFFF 50%, transparent 51%),
+      radial-gradient(1px 1px at 33% 62%, #E3D3F5 50%, transparent 51%),
+      radial-gradient(1px 1px at 52% 88%, #FFFFFF 50%, transparent 51%),
+      radial-gradient(1.5px 1.5px at 7% 80%, #FFFFFF 50%, transparent 51%);
+    background-size: 100% 100%, 420px 420px, 380px 380px, 520px 520px, 300px 300px, 460px 460px, 350px 350px;
+    background-attachment: fixed;
+  }
+
+  .top-bar {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 18px 20px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .logo {
+    display: block;
+    height: 56px;
+    width: auto;
+  }
+
+  .logo-spot {
+    display: grid;
+    place-items: center;
+    width: 160px;
+    height: 56px;
+    border: 1px dashed var(--card-border);
+    border-radius: 4px;
+    color: var(--text-dim);
+    font-size: 13px;
+  }
+
+  .site-link {
+    font-family: var(--heading-font);
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--gold);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .site-link:hover {
+    color: var(--gold-hover);
+    text-decoration: underline;
+  }
+
+  main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 28px 20px 60px;
+  }
+
+  h1 {
+    margin: 0 0 6px;
+    font-family: var(--heading-font);
+    font-size: clamp(34px, 6vw, 52px);
+    line-height: 1.05;
+  }
+
+  .intro {
+    margin: 0 0 24px;
+    color: var(--text-dim);
+    font-size: 17px;
+  }
+
+  .year-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--card-border);
+  }
+
+  .year-nav a {
+    font-family: var(--heading-font);
+    font-weight: 600;
+    font-size: 17px;
+    color: var(--text-dim);
+    text-decoration: none;
+    padding: 8px 16px;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -1px;
+  }
+
+  .year-nav a:hover {
+    color: var(--text);
+  }
+
+  .year-nav a[aria-current="page"] {
+    color: var(--text);
+    border-bottom-color: var(--gold);
+  }
+
+  .game-count {
+    margin: 0 0 16px;
+    color: var(--text-dim);
+    font-size: 14px;
+  }
+
+  .games {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 18px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .game {
+    display: flex;
+    flex-direction: column;
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .game:hover {
+    border-color: var(--gold);
+  }
+
+  .game img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+  }
+
+  .game-details {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 12px 14px 14px;
+  }
+
+  .game h2 {
+    margin: 0;
+    font-family: var(--heading-font);
+    font-size: 20px;
+    line-height: 1.2;
+    overflow-wrap: anywhere;
+  }
+
+  .made-by {
+    margin: 2px 0 8px;
+    color: var(--text-dim);
+    font-size: 14px;
+  }
+
+  .game-description {
+    margin: 0 0 12px;
+    font-size: 15px;
+    overflow-wrap: anywhere;
+  }
+
+  .play-link {
+    margin-top: auto;
+    align-self: flex-start;
+    font-family: var(--heading-font);
+    font-weight: 700;
+    font-size: 16px;
+    text-decoration: none;
+    color: var(--background);
+    background: var(--gold);
+    border-radius: 4px;
+    padding: 6px 20px;
+  }
+
+  .play-link:hover {
+    background: var(--gold-hover);
+  }
+
+  .no-games {
+    grid-column: 1 / -1;
+    padding: 40px 16px;
+    text-align: center;
+    color: var(--text-dim);
+    border: 1px dashed var(--card-border);
+    border-radius: 6px;
+  }
+
+  footer {
+    margin-top: 40px;
+    padding-top: 16px;
+    border-top: 1px solid var(--card-border);
+    color: var(--text-dim);
+    font-size: 14px;
+  }
+
+  a:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 2px;
+  }
+</style>
+</head>
+<body>
+<header class="top-bar">
+  <!-- put your logo next to this page and name it logo.png -->
+  <img class="logo" id="logo" src="logo.png" alt="Westfield Technical Academy IT">
+  <a class="site-link" href="https://it.westfield.tech">it.westfield.tech</a>
+</header>
+
+<main>
+  <h1>Student Arcade</h1>
+  <p class="intro">Games made by IT exploratory students at Westfield Technical Academy.</p>
+
+  <nav class="year-nav" id="year-nav" aria-label="Exploratory year"></nav>
+
+  <p class="game-count" id="game-count"></p>
+  <ul class="games" id="games"></ul>
+
+  <footer>All games were made in Unity and open on Unity Play.</footer>
+</main>
+
+<script>
+// Add new games to the top of this list.
+// maker: first name and last initial only
+// year: the year of the exploratory the game came from
+// image: optional screenshot, a file next to this page or a link, leave "" for a drawn cover
+// addedOn: YYYY-MM-DD, newest show first
+const games = [
+  {
+    title: "Squiid",
+    maker: "Week 3 Student",
+    year: 2026,
+    description: "squid",
+    link: "https://play.unity.com/en/games/74a45759-9564-4688-bdba-a6d2a1d16a9a/webbuilds",
+    image: "",
+    addedOn: "2026-11-20"
+  },
+  {
+    title: "Sprite Flight",
+    maker: "Week 3 Student",
+    year: 2026,
+    description: "",
+    link: "https://play.unity.com/en/games/c8e67541-8e6b-4442-95d9-e62023d23bea/build",
+    image: "",
+    addedOn: "2026-11-20"
+  },
+  {
+    title: "Sprite Flight",
+    maker: "Week 3 Student",
+    year: 2026,
+    description: "",
+    link: "https://play.unity.com/en/games/54eb6ae0-dc0f-4ab5-87da-6425cbe49554/build",
+    image: "",
+    addedOn: "2026-11-20"
+  },
+  {
+    title: "Sprite Flight",
+    maker: "Week 3 Student",
+    year: 2026,
+    description: "",
+    link: "https://play.unity.com/en/games/5585fc9e-63b0-45c0-ad44-244a3ee7a4ab/build",
+    image: "",
+    addedOn: "2026-11-20"
+  },
+  {
+    title: "Sprite Flight",
+    maker: "Week 3 Student",
+    year: 2026,
+    description: "",
+    link: "https://play.unity.com/en/games/e761d189-24a5-4648-ab87-6a1029c9a002/build",
+    image: "",
+    addedOn: "2026-11-20"
+  },
+  {
+    title: "Bild",
+    maker: "Week 3 Student",
+    year: 2026,
+    description: "Rocket you have to not get hit by a ball.",
+    link: "https://play.unity.com/en/games/10d9204c-c821-469c-94d5-09c55d411930/bild",
+    image: "",
+    addedOn: "2026-11-20"
+  },
+  {
+    title: "Sprite Flight",
+    maker: "Week 3 Student",
+    year: 2026,
+    description: "You are a sentient rocket ship. Your goal? Try not to get hit by those evil purple hexagon meteors of course!!",
+    link: "https://play.unity.com/en/games/c8cfebc4-825f-491d-ad51-c6dfae1818ed/sprite-flight",
+    image: "https://play.unity.com/api/v1/files/file/55fe07fa-23aa-4427-b6bc-85323502b33b/content",
+    addedOn: "2026-11-20"
+  },
+  {
+    title: "Sprite Flight",
+    maker: "Week 3 Student",
+    year: 2026,
+    description: "Rocket Game involving the skills off pros.",
+    link: "https://play.unity.com/en/games/a8364cdd-dfd3-43a9-ad2e-51bbfa30389a/build",
+    image: "",
+    addedOn: "2026-11-20"
+  },
+  {
+    title: "Sprite Flight",
+    maker: "Week 3 Student",
+    year: 2026,
+    description: "",
+    link: "https://play.unity.com/en/games/f9258351-4de2-4e08-b34e-7513b19320a5/build",
+    image: "",
+    addedOn: "2026-11-20"
+  },
+  {
+    title: "Sprite Flight",
+    maker: "Week 3 Student",
+    year: 2026,
+    description: "please play my game",
+    link: "https://play.unity.com/en/games/b3d601a5-7180-407f-a3b8-f2306feec958/build",
+    image: "",
+    addedOn: "2026-11-20"
+  }
+];
+
+// turns the link into a number so each game always gets the same cover
+function hashText(text) {
+  let hash = 0;
+  for (let index = 0; index < text.length; index++) {
+    hash = (hash * 31 + text.charCodeAt(index)) >>> 0;
+  }
+  return hash;
+}
+
+function seededRandom(seed) {
+  let value = seed || 1;
+  return () => {
+    value = (value * 1664525 + 1013904223) >>> 0;
+    return value / 4294967296;
+  };
+}
+
+function hexagonPoints(centerX, centerY, size) {
+  const points = [];
+  for (let corner = 0; corner < 6; corner++) {
+    const angle = (Math.PI / 3) * corner;
+    points.push(`${(centerX + size * Math.cos(angle)).toFixed(1)},${(centerY + size * Math.sin(angle)).toFixed(1)}`);
+  }
+  return points.join(" ");
+}
+
+// draws a ship and some asteroids for games without a screenshot
+function makeCover(seedText) {
+  const backgrounds = ["#2A1A40", "#3B2159", "#1E1528", "#4A2A6E", "#16101F", "#33204D"];
+  const rockColors = ["#D9A928", "#B8892A", "#EFCF72", "#A98BD6", "#CDB8EE"];
+  const random = seededRandom(hashText(seedText));
+  const background = backgrounds[Math.floor(random() * backgrounds.length)];
+  const rockColor = rockColors[Math.floor(random() * rockColors.length)];
+
+  let shapes = "";
+
+  for (let star = 0; star < 18; star++) {
+    const x = (random() * 320).toFixed(1);
+    const y = (random() * 180).toFixed(1);
+    const radius = (random() * 1.2 + 0.4).toFixed(1);
+    shapes += `<circle cx="${x}" cy="${y}" r="${radius}" fill="#FFFFFF" opacity="0.7"/>`;
+  }
+
+  for (let rock = 0; rock < 5; rock++) {
+    let x = random() * 300 + 10;
+    const y = random() * 160 + 10;
+    // keep rocks off the ship in the middle
+    if (Math.abs(x - 160) < 40) {
+      x += x < 160 ? -50 : 50;
+    }
+    const size = random() * 16 + 8;
+    shapes += `<polygon points="${hexagonPoints(x, y, size)}" fill="${rockColor}"/>`;
+  }
+
+  const tilt = Math.round(random() * 60 - 30);
+  shapes += `<g transform="translate(160 95) rotate(${tilt})">`
+    + `<polygon points="0,-22 15,16 0,9 -15,16" fill="#FFFFFF"/>`
+    + `<polygon points="-6,14 6,14 0,27" fill="#D9A928"/></g>`;
+
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 180"><rect width="320" height="180" fill="${background}"/>${shapes}</svg>`;
+  return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
+}
+
+function isWebLink(link) {
+  try {
+    const protocol = new URL(link).protocol;
+    return protocol === "https:" || protocol === "http:";
+  } catch {
+    return false;
+  }
+}
+
+function makeGameCard(game) {
+  const card = document.createElement("li");
+  card.className = "game";
+
+  const cover = document.createElement("img");
+  cover.alt = "";
+  cover.loading = "lazy";
+  cover.src = game.image || makeCover(game.link);
+  // if the screenshot is missing or won't load, draw one instead
+  cover.addEventListener("error", () => { cover.src = makeCover(game.link); }, { once: true });
+
+  const details = document.createElement("div");
+  details.className = "game-details";
+
+  const title = document.createElement("h2");
+  title.textContent = game.title;
+
+  const madeBy = document.createElement("p");
+  madeBy.className = "made-by";
+  madeBy.textContent = game.maker ? `by ${game.maker}` : "";
+
+  const description = document.createElement("p");
+  description.className = "game-description";
+  description.textContent = game.description || "";
+
+  details.append(title, madeBy, description);
+
+  if (isWebLink(game.link)) {
+    const playLink = document.createElement("a");
+    playLink.className = "play-link";
+    playLink.href = game.link;
+    playLink.target = "_blank";
+    playLink.rel = "noopener";
+    playLink.textContent = "Play";
+    playLink.setAttribute("aria-label", `Play ${game.title}`);
+    details.append(playLink);
+  }
+
+  card.append(cover, details);
+  return card;
+}
+
+// one tab per exploratory year, newest year first, starting at 2026
+const years = [...new Set(games.map((game) => game.year))]
+  .filter((year) => year >= 2026)
+  .sort((first, second) => second - first);
+
+function makeYearNav() {
+  const nav = document.getElementById("year-nav");
+  for (const year of years) {
+    const link = document.createElement("a");
+    link.href = `#${year}`;
+    link.textContent = `Exploratory ${year}`;
+    nav.append(link);
+  }
+}
+
+function showYear() {
+  // the year comes from the address bar (like #2026), otherwise the newest year
+  const yearFromAddress = Number(location.hash.slice(1));
+  const selectedYear = years.includes(yearFromAddress) ? yearFromAddress : years[0];
+
+  for (const link of document.querySelectorAll("#year-nav a")) {
+    if (link.getAttribute("href") === `#${selectedYear}`) {
+      link.setAttribute("aria-current", "page");
+    } else {
+      link.removeAttribute("aria-current");
+    }
+  }
+
+  const yearGames = games
+    .filter((game) => game.year === selectedYear)
+    .sort((first, second) => (second.addedOn || "").localeCompare(first.addedOn || ""));
+
+  const list = document.getElementById("games");
+  list.replaceChildren();
+
+  if (yearGames.length === 0) {
+    const message = document.createElement("li");
+    message.className = "no-games";
+    message.textContent = "No games yet.";
+    list.append(message);
+  } else {
+    for (const game of yearGames) {
+      list.append(makeGameCard(game));
+    }
+  }
+
+  document.getElementById("game-count").textContent = `${yearGames.length} ${yearGames.length === 1 ? "game" : "games"}`;
+}
+
+// if logo.png isn't there yet, show an empty spot instead of a broken image
+function showLogoSpot() {
+  const logo = document.getElementById("logo");
+  if (!logo) {
+    return;
+  }
+  const spot = document.createElement("div");
+  spot.className = "logo-spot";
+  spot.textContent = "Logo";
+  logo.replaceWith(spot);
+}
+
+const logo = document.getElementById("logo");
+if (logo.complete && logo.naturalWidth === 0) {
+  // it already failed before this script ran
+  showLogoSpot();
+} else {
+  logo.addEventListener("error", showLogoSpot, { once: true });
+}
+
+window.addEventListener("hashchange", showYear);
+
+makeYearNav();
+showYear();
+</script>
+</body>
+</html>
